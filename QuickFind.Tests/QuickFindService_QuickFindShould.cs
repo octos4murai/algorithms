@@ -8,7 +8,7 @@ namespace QuickFind.Tests
 
         public QuickFindService_QuickFindShould()
         {
-            var sampleArr = new int[] { 5, 3, 7, 11, 4, 2, 0 };
+            var sampleArr = new int[] { 0, 1, 2, 3, 4, 5, 6 };
             _qf = new QuickFindService(sampleArr);
             _qf.Union(0, 6);
             _qf.Union(0, 1);
