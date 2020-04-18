@@ -67,21 +67,32 @@ namespace QuickUnion
             if (_sizes[xRootIndex] < _sizes[yRootIndex])
             {
                 _sizes[yRootIndex] += _sizes[xRootIndex];
-                _sizes[xRootIndex] = 0;
-
                 Nodes[xRootIndex] = yRootIndex;
                 return;
             }
 
             _sizes[xRootIndex] += _sizes[yRootIndex];
-            _sizes[yRootIndex] = 0;
-
             Nodes[yRootIndex] = xRootIndex;
         }
 
         private void UnionCompressed(int x, int y)
         {
-            throw new NotImplementedException();
+            var xRootIndex = GetRootNodeIndex(x);
+            var yRootIndex = GetRootNodeIndex(y);
+
+            if (xRootIndex == yRootIndex) return;
+
+            if (_sizes[xRootIndex] < _sizes[yRootIndex])
+            {
+                CompressTree(x, xRootIndex);
+                _sizes[yRootIndex] += _sizes[xRootIndex];
+                Nodes[xRootIndex] = yRootIndex;
+                return;
+            }
+
+            CompressTree(y, yRootIndex);
+            _sizes[xRootIndex] += _sizes[yRootIndex];
+            Nodes[yRootIndex] = xRootIndex;
         }
 
         // Traverse up the tree of nodes until the root is found and return its index.
@@ -94,6 +105,18 @@ namespace QuickUnion
             }
 
             return currentIndex;
+        }
+
+        // Traverse up the tree of nodes, pointing each node to the root.
+        private void CompressTree(int x, int rootIndex)
+        {
+            int currentIndex = x;
+            while (Nodes[currentIndex] != rootIndex)
+            {
+                int previousIndex = currentIndex;
+                currentIndex = Nodes[currentIndex];
+                Nodes[previousIndex] = rootIndex;
+            }
         }
 
         public enum Mode
