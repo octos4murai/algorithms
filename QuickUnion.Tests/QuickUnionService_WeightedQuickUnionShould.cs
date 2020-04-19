@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 
 namespace QuickUnion.Tests
@@ -9,8 +8,7 @@ namespace QuickUnion.Tests
 
         public QuickUnionService_WeightedQuickUnionShould()
         {
-            var sampleArr = new int[] { 0, 1, 2, 3, 4, 5, 6 };
-            _wqu = new QuickUnionService(sampleArr, QuickUnionService.Mode.WEIGHTED);
+            _wqu = new QuickUnionService(7, QuickUnionService.Mode.WEIGHTED);
             _wqu.Union(0, 6);
             _wqu.Union(0, 1);
             _wqu.Union(5, 2);

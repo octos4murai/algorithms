@@ -4,6 +4,17 @@
     {
         public int[] Nodes { get; }
 
+        public QuickFindService(int numNodes)
+        {
+            var nodes = new int[numNodes];
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                nodes[i] = i;
+            }
+
+            Nodes = nodes;
+        }
+
         public QuickFindService(int[] nodes)
         {
             Nodes = nodes;

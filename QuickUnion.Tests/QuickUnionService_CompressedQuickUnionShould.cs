@@ -1,16 +1,14 @@
-using System;
 using Xunit;
 
 namespace QuickUnion.Tests
 {
     public class QuickUnionService_CompressedQuickUnionShould
     {
-        private QuickUnionService _cqu;
+        private readonly QuickUnionService _cqu;
 
         public QuickUnionService_CompressedQuickUnionShould()
         {
-            var sampleArr = new int[] { 0, 1, 2, 3, 4, 5, 6 };
-            _cqu = new QuickUnionService(sampleArr, QuickUnionService.Mode.WEIGHTED_COMPRESSED);
+            _cqu = new QuickUnionService(7, QuickUnionService.Mode.WEIGHTED_COMPRESSED);
             _cqu.Union(0, 6);
             _cqu.Union(0, 1);
             _cqu.Union(5, 2);

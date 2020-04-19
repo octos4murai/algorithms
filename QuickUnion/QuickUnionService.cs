@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace QuickUnion
 {
@@ -8,6 +7,28 @@ namespace QuickUnion
         public int[] Nodes { get; }
         private int[] _sizes;
         private Mode _selectedMode;
+
+        public QuickUnionService(int numNodes, Mode mode = Mode.SIMPLE)
+        {
+            var nodes = new int[numNodes];
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                nodes[i] = i;
+            }
+
+            Nodes = nodes;
+
+            _selectedMode = mode;
+
+            if (_selectedMode == Mode.WEIGHTED || _selectedMode == Mode.WEIGHTED_COMPRESSED)
+            {
+                _sizes = new int[nodes.Length];
+                for (int i = 0; i < _sizes.Length; i++)
+                {
+                    _sizes[i] = 1;
+                }
+            }
+        }
 
         public QuickUnionService(int[] nodes, Mode mode = Mode.SIMPLE)
         {
@@ -121,9 +142,9 @@ namespace QuickUnion
 
         public enum Mode
         {
-            SIMPLE = 0,
-            WEIGHTED = 1,
-            WEIGHTED_COMPRESSED = 2
+            SIMPLE,
+            WEIGHTED,
+            WEIGHTED_COMPRESSED
         }
     }
 }
