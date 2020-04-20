@@ -1,6 +1,7 @@
 ﻿using Percolation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace PercolationSimulator
 {
@@ -10,24 +11,16 @@ namespace PercolationSimulator
         {
             Console.WriteLine("Hello World!");
 
-            // All sites are initially blocked.
-            var ps = new PercolationService(20);
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
 
-            int numOpened = 0;
-            while (!ps.DoesPercolate())
-            {
-                // Randomly select a blocked site.
-                List<int> blockedSites = ps.GetAllBlockedSites();
-                var r = new Random();
-                int randomIndex = r.Next(blockedSites.Count);
-                int randomSite = blockedSites[randomIndex];
+            var ps = new PercolationSimulator(200, 10);
+            Console.WriteLine($"Mean: {ps.GetMean()}");
+            Console.WriteLine($"SD: {ps.GetStandardDeviation()}");
+            Console.WriteLine($"95% Confidence: [{ps.ConfidenceLo()}, {ps.ConfidenceHi()}]");
 
-                // Open random blocked site.
-                ps.Open(randomSite);
-                numOpened++;
-            }
-
-            Console.WriteLine(numOpened);
+            stopwatch.Stop();
+            Console.WriteLine($"Time Elapsed: {stopwatch.Elapsed}");
         }
     }
 }

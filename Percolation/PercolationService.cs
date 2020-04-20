@@ -1,4 +1,5 @@
 ﻿using QuickFind;
+using QuickUnion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,13 @@ namespace Percolation
 {
     public class PercolationService
     {
-        private readonly QuickFindService solver;
+        // -----
+        // Toggle for debugging
+        // -----
+        // private readonly QuickFind solver;
+        private readonly QuickUnionService solver;
+        // -----
+
         private int[] _siteStates;
         private int _numOpenSites;
         private int _numSites;
@@ -17,8 +24,15 @@ namespace Percolation
         {
             _numSites = n * n;
 
+            // -----
+            // Toggle for debugging
+            // -----
             // Add two for dummy start node and dummy end node.
-            solver = new QuickFindService(_numSites + 2);
+            // solver = new QuickFind(_numSites + 2);
+            // solver = new QuickUnionService(_numSites + 2);
+            solver = new QuickUnionService(_numSites + 2, QuickUnionService.Mode.WEIGHTED);
+            // solver = new QuickUnionService(_numSites + 2, QuickUnionService.Mode.WEIGHTED_COMPRESSED);
+            // -----
 
             // Initialize all sites with state 0, meaning blocked.
             _siteStates = new int[_numSites];

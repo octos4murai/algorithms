@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuickFind\QuickFind.csproj" />
+    <ProjectReference Include="..\QuickUnion\QuickUnion.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
