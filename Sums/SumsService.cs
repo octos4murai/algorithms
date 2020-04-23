@@ -5,19 +5,40 @@ namespace Sums
 {
     public static class SumsService
     {
-        // Given an array of numbers, find all instances of the given value
-        // and return a list of the matching indices.
-        public static List<int> OneSum(int[] nums, int val)
+        // Given an array of numbers and a value, return the index of the element
+        // equivalent to the value.
+        public static int OneSum(int[] nums, int val)
         {
-            var foundList = new List<int>();
-
             for (int i = 0; i < nums.Length; i++)
             {
                 if (nums[i] == val)
-                    foundList.Add(i);
+                    return i;
             }
 
-            return foundList;
+            return -1;
+        }
+
+        // Given an array of numbers and a value, return the indexes of the pair
+        // of elements that add up to the value, in ascending order.
+        public static (int, int) TwoSum(int[] nums, int val)
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    if (nums[i] + nums[j] == val)
+                        return (i, j);
+                }
+            }
+
+            return (-1, -1);
+        }
+
+        // Given an array of numbers and a value, return the indexes of a set of
+        // three elements that add up to the value, in ascending order.
+        public static (int, int, int) ThreeSum(int[] nums, int val)
+        {
+            throw new NotImplementedException();
         }
     }
 }
