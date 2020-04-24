@@ -1,25 +1,12 @@
-﻿using System;
+﻿using BinarySearch;
+using System;
 using System.Collections.Generic;
 
 namespace Sums
 {
     public static class SumsService
     {
-        // Given an array of numbers and a value, return the index of the element
-        // equivalent to the value.
-        public static int OneSum(int[] nums, int val)
-        {
-            for (int i = 0; i < nums.Length; i++)
-            {
-                if (nums[i] == val)
-                    return i;
-            }
-
-            return -1;
-        }
-
-        // Given an array of numbers and a value, return the indexes of the pair
-        // of elements that add up to the value, in ascending order.
+        // Given an array of numbers and a value, return the pair of elements that add up to the value.
         public static (int, int) TwoSum(int[] nums, int val)
         {
             for (int i = 0; i < nums.Length; i++)
@@ -27,18 +14,32 @@ namespace Sums
                 for (int j = i + 1; j < nums.Length; j++)
                 {
                     if (nums[i] + nums[j] == val)
-                        return (i, j);
+                        return (nums[i], nums[j]);
                 }
             }
 
             return (-1, -1);
         }
 
-        // Given an array of numbers and a value, return the indexes of a set of
-        // three elements that add up to the value, in ascending order.
+        // Given an array of numbers and a value, return the three elements that add up to the value.
         public static (int, int, int) ThreeSum(int[] nums, int val)
         {
-            throw new NotImplementedException();
+            var numsList = new List<int>(nums);
+            numsList.Sort();
+
+            for (int i = 0; i < numsList.Count; i++)
+            {
+                for (int j = i + 1; j < numsList.Count; j++)
+                {
+                    var missingNum = val - (numsList[i] + numsList[j]);
+                    int missingNumIndex = BinarySearchService.Run(numsList.ToArray(), missingNum);
+
+                    if (missingNumIndex != -1)
+                        return (numsList[i], numsList[j], numsList[missingNumIndex]);
+                }
+            }
+
+            return (-1, -1, -1);
         }
     }
 }
