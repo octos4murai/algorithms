@@ -4,8 +4,8 @@ namespace Collections
 {
     public class LinkedListStack<T> : IStack<T>
     {
-        private Node<T> _top;
         private int _size;
+        private Node<T> _top;
 
         public void Push(T arg)
         {
@@ -39,6 +39,11 @@ namespace Collections
         public int GetSize()
         {
             return _size;
+        }
+
+        public T Peek()
+        {
+            return _top.Value;
         }
     }
 }
