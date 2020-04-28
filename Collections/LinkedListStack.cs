@@ -43,6 +43,9 @@ namespace Collections
 
         public T Peek()
         {
+            if (IsEmpty())
+                throw new InvalidOperationException("Cannot peek an empty stack.");
+
             return _top.Value;
         }
     }
