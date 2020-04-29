@@ -25,7 +25,12 @@ namespace Collections
                 throw new InvalidOperationException("Cannot pop an empty stack.");
 
             var previousTop = _top;
-            _top = _top.Next;
+            var nextTop = _top.Next;
+
+            // Remove dangling reference
+            _top.Next = null;
+
+            _top = nextTop;
             _size--;
 
             return previousTop.Value;

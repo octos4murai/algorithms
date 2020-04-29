@@ -11,7 +11,7 @@ namespace Collections.Tests
         public void IsEmpty_NewStack_ReturnTrue()
         {
             var stack = new LinkedListStack<int>();
-            Assert.Equal(true, stack.IsEmpty());
+            Assert.True(stack.IsEmpty());
         }
 
         [Theory]
@@ -25,7 +25,7 @@ namespace Collections.Tests
             foreach (int num in nums)
                 stack.Push(num);
 
-            Assert.Equal(false, stack.IsEmpty());
+            Assert.False(stack.IsEmpty());
         }
     }
 }

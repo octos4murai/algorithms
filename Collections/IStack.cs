@@ -8,5 +8,6 @@ namespace Collections
         T Pop();
         bool IsEmpty();
         int GetSize();
+        T Peek();
     }
 }
