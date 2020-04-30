@@ -2,12 +2,12 @@ using Xunit;
 
 namespace Collections.Tests
 {
-    public class LinkedListStack_IsEmptyShould
+    public class ArrayStack_IsEmptyShould
     {
         [Fact]
         public void IsEmpty_NewStack_ReturnTrue()
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
             Assert.True(stack.IsEmpty());
         }
 
@@ -17,7 +17,7 @@ namespace Collections.Tests
         [InlineData(9, -5, 2, 7, 1)]
         public void IsEmpty_NonEmptyStack_ReturnFalse(params int[] nums)
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
 
             foreach (int num in nums)
                 stack.Push(num);

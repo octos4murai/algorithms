@@ -20,5 +20,20 @@ namespace Collections.Tests
                 Assert.Equal(num, stack.Peek());
             }
         }
+
+        [Theory]
+        [InlineData("foo")]
+        [InlineData("bar", "foo")]
+        [InlineData("bar", "tan", "foo", "arc")]
+        public void Push_StringTypes_PushValues(params string[] strings)
+        {
+            var stack = new ArrayStack<string>();
+
+            foreach (string str in strings)
+            {
+                stack.Push(str);
+                Assert.Equal(str, stack.Peek());
+            }
+        }
     }
 }

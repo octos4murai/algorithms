@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Collections.Tests
 {
-    public class LinkedListStack_PeekShould
+    public class ArrayStack_PeekShould
     {
         [Theory]
         [InlineData(5)]
@@ -11,7 +11,7 @@ namespace Collections.Tests
         [InlineData(9, -5, 2, 7, 1)]
         public void Peek_NonEmptyStack_ReturnValue(params int[] nums)
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
 
             foreach (int num in nums)
                 stack.Push(num);
@@ -23,7 +23,7 @@ namespace Collections.Tests
         [Fact]
         public void Peek_EmptyStack_ReturnNull()
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => stack.Peek());
             Assert.Equal("Cannot peek an empty stack.", ex.Message);
         }
@@ -34,7 +34,7 @@ namespace Collections.Tests
         [InlineData(9, -5, 2, 7, 1)]
         public void Peek_NewlyEmptyStack_ReturnNull(params int[] nums)
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
 
             foreach (int num in nums)
                 stack.Push(num);

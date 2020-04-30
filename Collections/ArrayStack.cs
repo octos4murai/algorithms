@@ -4,8 +4,8 @@ namespace Collections
 {
     public class ArrayStack<T> : IStack<T>
     {
-        private static T[] _elements = new T[0];
-        private static int? _top = null;
+        private T[] _elements = new T[0];
+        private int? _top = null;
 
         public int GetSize()
         {
@@ -20,7 +20,7 @@ namespace Collections
         public T Peek()
         {
             if (!_top.HasValue)
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Cannot peek an empty stack.");
 
             return _elements[_top.GetValueOrDefault()];
         }
@@ -28,15 +28,15 @@ namespace Collections
         public T Pop()
         {
             if (!_top.HasValue)
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Cannot pop an empty stack.");
+
+            T elementToReturn = _elements[_top.GetValueOrDefault()];
+            _top = _top == 0 ? null : _top - 1;
 
             if (IsElementArrayShrinkageRequired())
                 ShrinkElementArray();
 
-            int indexToReturn = _top.GetValueOrDefault();
-            _top = _top == 0 ? null : _top - 1;
-
-            return _elements[indexToReturn];
+            return elementToReturn;
         }
 
         public void Push(T arg)
@@ -50,7 +50,7 @@ namespace Collections
 
         private bool IsElementArrayGrowthRequired()
         {
-            return _top.GetValueOrDefault() == 0 || _top.GetValueOrDefault() == _elements.Length - 1;
+            return !_top.HasValue || _top.GetValueOrDefault() == _elements.Length - 1;
         }
 
         private void GrowElementArray()
@@ -63,13 +63,12 @@ namespace Collections
 
         private bool IsElementArrayShrinkageRequired()
         {
-            return _elements.Length != 0 && _top.GetValueOrDefault() <= _elements.Length / 4;
+            return _top.HasValue && _top.GetValueOrDefault() <= _elements.Length / 4;
         }
 
         private void ShrinkElementArray()
         {
-            int newArrayLength = _elements.Length / 2;
-            var halvedArray = new T[newArrayLength];
+            var halvedArray = new T[_elements.Length / 2];
             Array.Copy(_elements, halvedArray, halvedArray.Length);
             _elements = halvedArray;
         }

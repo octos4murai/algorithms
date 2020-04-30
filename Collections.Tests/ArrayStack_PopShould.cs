@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Collections.Tests
 {
-    public class LinkedListStack_PopShould
+    public class ArrayStack_PopShould
     {
         [Theory]
         [InlineData(5)]
@@ -11,7 +11,7 @@ namespace Collections.Tests
         [InlineData(9, -5, 2, 7, 1)]
         public void Pop_ValidOperation_PopValues(params int[] nums)
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
 
             foreach (int num in nums)
                 stack.Push(num);
@@ -35,7 +35,7 @@ namespace Collections.Tests
         [Fact]
         public void Pop_InvalidOperation_ThrowsInvalidOperationException()
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => stack.Pop());
             Assert.Equal("Cannot pop an empty stack.", ex.Message);
         }
