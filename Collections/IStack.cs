@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Collections
+﻿namespace Collections
 {
     public interface IStack<T>
     {
