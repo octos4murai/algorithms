@@ -2,12 +2,12 @@ using Xunit;
 
 namespace Collections.Tests
 {
-    public class LinkedListStack_GetSizeShould
+    public class ArrayStack_GetSizeShould
     {
         [Fact]
         public void GetSize_NewStack_ReturnZero()
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
             Assert.Equal(0, stack.GetSize());
         }
 
@@ -17,7 +17,7 @@ namespace Collections.Tests
         [InlineData(9, -5, 2, 7, 1)]
         public void GetSize_NonEmptyStack_ReturnSize(params int[] nums)
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
 
             foreach (int num in nums)
                 stack.Push(num);
@@ -32,7 +32,7 @@ namespace Collections.Tests
         [InlineData(5, 9, -5, 2, 7, 1)]
         public void GetSize_PopElements_ReturnSize(int numToPop, params int[] nums)
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new ArrayStack<int>();
 
             foreach (int num in nums)
                 stack.Push(num);

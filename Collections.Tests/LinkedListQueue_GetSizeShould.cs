@@ -2,12 +2,12 @@ using Xunit;
 
 namespace Collections.Tests
 {
-    public class LinkedListStack_GetSizeShould
+    public class LinkedListQueue_GetSizeShould
     {
         [Fact]
-        public void GetSize_NewStack_ReturnZero()
+        public void GetSize_NewQueue_ReturnZero()
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new LinkedListQueue<int>();
             Assert.Equal(0, stack.GetSize());
         }
 
@@ -15,12 +15,12 @@ namespace Collections.Tests
         [InlineData(5)]
         [InlineData(-1, 0)]
         [InlineData(9, -5, 2, 7, 1)]
-        public void GetSize_NonEmptyStack_ReturnSize(params int[] nums)
+        public void GetSize_NonEmptyQueue_ReturnSize(params int[] nums)
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new LinkedListQueue<int>();
 
             foreach (int num in nums)
-                stack.Push(num);
+                stack.Enqueue(num);
 
             Assert.Equal(nums.Length, stack.GetSize());
         }
@@ -30,15 +30,15 @@ namespace Collections.Tests
         [InlineData(0, -1, 0)]
         [InlineData(3, 9, -5, 2, 7, 1)]
         [InlineData(5, 9, -5, 2, 7, 1)]
-        public void GetSize_PopElements_ReturnSize(int numToPop, params int[] nums)
+        public void GetSize_DequeueElements_ReturnSize(int numToPop, params int[] nums)
         {
-            var stack = new LinkedListStack<int>();
+            var stack = new LinkedListQueue<int>();
 
             foreach (int num in nums)
-                stack.Push(num);
+                stack.Enqueue(num);
 
             for (int i = numToPop; i > 0; i--)
-                stack.Pop();
+                stack.Dequeue();
 
             Assert.Equal(nums.Length - numToPop, stack.GetSize());
         }
