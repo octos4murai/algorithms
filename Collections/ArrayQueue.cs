@@ -4,13 +4,42 @@ namespace Collections
 {
     public class ArrayQueue<T> : IQueue<T>
     {
-        private int? _head = null;
-        private int? _tail = null;
+        private int? _exitpoint = null;
+        private int? _entrypoint = null;
         private T[] _elements = new T[0];
 
         public T Dequeue()
         {
-            throw new System.NotImplementedException();
+            if (GetSize() == 0)
+                throw new InvalidOperationException("Cannot dequeue an empty queue.");
+
+            var elemToRemove = _elements[_exitpoint.GetValueOrDefault()];
+
+            if (GetSize() == 1)
+            {
+                _exitpoint = null;
+                _entrypoint = null;
+            }
+            else
+            {
+                _exitpoint++;
+            }
+
+            if (IsElementArrayShrinkRequired())
+                ShrinkElementArray();
+
+            return elemToRemove;
+        }
+
+        private void ShrinkElementArray()
+        {
+            var newArray = new T[GetSize() * 2];
+            Array.Copy(_elements, _exitpoint.GetValueOrDefault(), newArray, 0, GetSize());
+        }
+
+        private bool IsElementArrayShrinkRequired()
+        {
+            return _exitpoint.HasValue || _exitpoint >= _elements.Length * 3 / 4;
         }
 
         public void Enqueue(T arg)
@@ -18,22 +47,22 @@ namespace Collections
             if (IsElementArrayGrowthRequired())
                 GrowElementArray();
 
-            if (_head.HasValue)
+            if (_exitpoint.HasValue)
             {
-                _tail++;
+                _entrypoint++;
             }
             else
             {
-                _head = 0;
-                _tail = 0;
+                _exitpoint = 0;
+                _entrypoint = 0;
             }
 
-            _elements[_tail.GetValueOrDefault()] = arg;
+            _elements[_entrypoint.GetValueOrDefault()] = arg;
         }
 
         private bool IsElementArrayGrowthRequired()
         {
-            return !_tail.HasValue || _tail == GetSize() - 1;
+            return !_entrypoint.HasValue || _entrypoint == GetSize() - 1;
         }
 
         private void GrowElementArray()
@@ -43,8 +72,8 @@ namespace Collections
 
             if (GetSize() > 0)
             {
-                int copyLength = _tail.GetValueOrDefault() - _head.GetValueOrDefault() + 1;
-                Array.Copy(_elements, _head.GetValueOrDefault(), newArray, 0, copyLength);
+                int copyLength = _entrypoint.GetValueOrDefault() - _exitpoint.GetValueOrDefault() + 1;
+                Array.Copy(_elements, _exitpoint.GetValueOrDefault(), newArray, 0, copyLength);
             }
 
             _elements = newArray;
@@ -52,7 +81,7 @@ namespace Collections
 
         public int GetSize()
         {
-            return !_tail.HasValue ? 0 : _tail.GetValueOrDefault() - _head.GetValueOrDefault() + 1;
+            return !_entrypoint.HasValue ? 0 : _entrypoint.GetValueOrDefault() - _exitpoint.GetValueOrDefault() + 1;
         }
 
         public bool IsEmpty()

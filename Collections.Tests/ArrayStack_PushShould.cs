@@ -1,5 +1,3 @@
-using Collections;
-using System;
 using Xunit;
 
 namespace Collections.Tests
