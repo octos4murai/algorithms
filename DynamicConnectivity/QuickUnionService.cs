@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace QuickUnion
+namespace DynamicConnectivity
 {
     public class QuickUnionService
     {

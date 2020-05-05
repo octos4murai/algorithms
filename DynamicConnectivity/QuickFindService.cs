@@ -1,4 +1,4 @@
-﻿namespace QuickFind
+﻿namespace DynamicConnectivity
 {
     public class QuickFindService
     {

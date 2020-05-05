@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace QuickUnion.Tests
+namespace DynamicConnectivity.Tests
 {
     public class QuickUnionService_CompressedQuickUnionShould
     {

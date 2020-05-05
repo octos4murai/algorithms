@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Deque\Deque.csproj" />
+    <ProjectReference Include="..\DynamicConnectivity\DynamicConnectivity.csproj" />
   </ItemGroup>
 
 </Project>

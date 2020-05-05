@@ -1,7 +1,6 @@
-using System;
 using Xunit;
 
-namespace Deque.Tests
+namespace Collections.Tests
 {
     public class Deque_IsEmptyShould
     {
