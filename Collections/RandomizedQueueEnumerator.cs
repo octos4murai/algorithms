@@ -5,32 +5,37 @@ namespace Collections
 {
     public class RandomizedQueueEnumerator<T> : IEnumerator<T>
     {
-        private Node<T> _root = null;
-        private Node<T> _curr = null;
+        private T[] _elements;
+        private int _currIndex;
+        private T _currElement;
 
-        public RandomizedQueueEnumerator(Node<T> node) =>
-            _root = node;
+        public RandomizedQueueEnumerator(T[] arr)
+        {
+            _elements = arr;
+            _currIndex = -1;
+            _currElement = default(T);
+        }
 
         public T Current =>
-            _curr.Value;
+            _currElement;
 
         object IEnumerator.Current =>
             Current;
 
-        public void Dispose() =>
-            _root = null;
+        public void Dispose() { }
 
         public bool MoveNext()
         {
-            if (_curr == null)
-                _curr = _root;
-            else
-                _curr = _curr.Next;
+            _currIndex++;
 
-            return _curr != null;
+            if (_currIndex >= _elements.Length)
+                return false;
+
+            _currElement = _elements[_currIndex];
+            return true;
         }
 
         public void Reset() =>
-            _curr = null;
+            _currIndex = -1;
     }
 }
