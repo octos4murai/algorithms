@@ -1,5 +1,4 @@
-﻿using QuickFind;
-using QuickUnion;
+﻿using DynamicConnectivity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

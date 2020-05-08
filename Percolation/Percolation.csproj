@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\QuickFind\QuickFind.csproj" />
-    <ProjectReference Include="..\QuickUnion\QuickUnion.csproj" />
+    <ProjectReference Include="..\DynamicConnectivity\DynamicConnectivity.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
