@@ -12,7 +12,7 @@ namespace Collections
         public T Dequeue()
         {
             if (GetSize() == 0)
-                throw new NotSupportedException("Cannot call dequeue on empty randomized queue.");
+                throw new InvalidOperationException("Cannot dequeue an empty queue.");
 
             var r = new Random();
             int rIndex = r.Next(GetSize() - 1);
