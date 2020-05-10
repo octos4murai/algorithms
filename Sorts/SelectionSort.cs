@@ -4,10 +4,6 @@ namespace Sorts
 {
     public class SelectionSort<T> where T : IComparable<T>, IEquatable<T>
     {
-        public SelectionSort()
-        {
-        }
-
         public static void Run(T[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
