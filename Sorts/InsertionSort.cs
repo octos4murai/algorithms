@@ -4,15 +4,21 @@ namespace Sorts
 {
     public class InsertionSort<T> where T : IComparable<T>, IEquatable<T>
     {
-        public static void Run(T[] arr)
+        public static void Run(T[] arr, int h = 1)
         {
             for (int i = 0; i < arr.Length; i++)
             {
-                for (int j = i; j > 0; j--)
+                for (int j = i; j > 0; j -= h)
                 {
-                    int result = arr[j].CompareTo(arr[j - 1]);
+                    int current = j;
+                    int previous = j - h;
+
+                    if (previous < 0)
+                        break;
+
+                    int result = arr[current].CompareTo(arr[previous]);
                     if (result < 0)
-                        Swap(arr, j, j - 1);
+                        Swap(arr, current, previous);
                     else
                         break;
                 }
