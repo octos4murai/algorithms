@@ -10,7 +10,7 @@ namespace Sorts
             Sort(arr, aux, 0, arr.Length - 1);
         }
 
-        public static void Sort(T[] arr, T[] aux, int lo, int hi)
+        private static void Sort(T[] arr, T[] aux, int lo, int hi)
         {
             if (lo == hi)
                 return;
