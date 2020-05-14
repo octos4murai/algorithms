@@ -4,23 +4,40 @@ namespace Sorts
 {
     public class Mergesort<T> where T : IComparable<T>, IEquatable<T>
     {
-        public static void Run(T[] arr)
+        public static void Run(T[] arr, MergesortType type = MergesortType.RECURSIVE)
         {
             var aux = new T[arr.Length];
-            Sort(arr, aux, 0, arr.Length - 1);
+
+            if (type == MergesortType.RECURSIVE)
+                RecursiveSort(arr, aux, 0, arr.Length - 1);
+            else
+                BottomUpSort(arr, aux);
         }
 
-        private static void Sort(T[] arr, T[] aux, int lo, int hi)
+        private static void RecursiveSort(T[] arr, T[] aux, int lo, int hi)
         {
             if (lo == hi)
                 return;
 
             int md = ((hi - lo) / 2) + lo;
 
-            Sort(arr, aux, lo, md);
-            Sort(arr, aux, md + 1, hi);
+            RecursiveSort(arr, aux, lo, md);
+            RecursiveSort(arr, aux, md + 1, hi);
 
             Merge(arr, aux, lo, md, hi);
+        }
+
+        private static void BottomUpSort(T[] arr, T[] aux)
+        {
+            for (int groupSize = 1; groupSize < arr.Length; groupSize *= 2)
+            {
+                for (int lo = 0; lo < arr.Length - groupSize; lo += (groupSize * 2))
+                {
+                    int md = lo + groupSize - 1;
+                    int hi = Math.Min(lo + (groupSize * 2) - 1, arr.Length - 1);
+                    Merge(arr, aux, lo, md, hi);
+                }
+            }
         }
 
         private static void Merge(T[] arr, T[] aux, int lo, int md, int hi)
@@ -53,6 +70,12 @@ namespace Sorts
                     j++;
                 }
             }
+        }
+
+        public enum MergesortType
+        {
+            RECURSIVE,
+            BOTTOM_UP
         }
     }
 }
