@@ -29,12 +29,12 @@ namespace Sorts
 
         private static void BottomUpSort(T[] arr, T[] aux)
         {
-            for (int groupSize = 1; groupSize < arr.Length; groupSize *= 2)
+            for (int size = 1; size < arr.Length; size *= 2)
             {
-                for (int lo = 0; lo < arr.Length - groupSize; lo += (groupSize * 2))
+                for (int lo = 0; lo < arr.Length - size; lo += (size * 2))
                 {
-                    int md = lo + groupSize - 1;
-                    int hi = Math.Min(lo + (groupSize * 2) - 1, arr.Length - 1);
+                    int md = lo + size - 1;
+                    int hi = Math.Min(lo + (size * 2) - 1, arr.Length - 1);
                     Merge(arr, aux, lo, md, hi);
                 }
             }
